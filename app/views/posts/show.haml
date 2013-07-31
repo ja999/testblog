@@ -2,7 +2,7 @@
   %h2
     = post.title
     %small
-      = post.created_at
+      = l post.created_at
   = link_to "edit", edit_post_path(post), class: 'post__button--edit'
 
   .post__body
@@ -10,3 +10,6 @@
   .post__tags-list.tagsinput
     - post.tags_array.each do |tag|
       = content_tag :span, tag, class: 'tag'
+  .post__comments_link
+    = link_to "Comments", post_comments_path(post)
+    = link_to "Back", posts_path, class: 'post__button--add pull-right'

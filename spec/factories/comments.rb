@@ -2,8 +2,7 @@
 
 FactoryGirl.define do
   factory :comment do
-    body "lorem lorem"
-    association :user
-    created_at Time.now
+    body "MyString"
+    title "MyString"
   end
 end

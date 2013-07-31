@@ -8,4 +8,6 @@
   - posts.each do |post|
     %li.post--short-size
       .post__title= link_to post.title, post_path(post)
+      .post__author= post.user.to_s
       .post__body= post.truncated_body
+      .post__comments_link= link_to "Comments", post_comments_path(post)

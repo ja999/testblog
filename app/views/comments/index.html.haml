@@ -1,0 +1,32 @@
+%h1 Listing comments
+
+%table
+  %tr
+    %th Body
+    %th Title
+    %th Opinion
+    %th Author
+    %th
+    %th
+    %th
+    %th
+
+  - comments.each do |comment|
+    - if comment.abusive==false || current_user.id==post.user_id
+      %tr
+        %td= comment.title
+        %td= comment.body
+        %td= comment.opinion
+        %td= comment.user.to_s
+        %td= link_to "Vote up!", w_gore_path(post, comment)
+        %td= link_to "Vote down...", do_piekla_path(post, comment)
+        - if current_user.id==comment.user_id
+          %td= link_to 'Edit', edit_post_comment_path(post, comment)
+          %td= link_to 'Destroy', post_comment_path(post, comment), :method => :delete, :data => { :confirm => 'Are you sure?' }
+        - if current_user.id==post.user_id && comment.abusive==true
+          %td= link_to 'Mark as not abusive', not_abusive_path(post, comment)
+
+%br
+
+= link_to 'New Comment', new_post_comment_path
+= link_to "Back", post_path(post), class: 'post__button--add pull-right'
